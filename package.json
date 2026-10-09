@@ -1,0 +1,52 @@
+{
+  "name": "logistics",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "create-admin": "tsx --conditions=react-server scripts/create-admin.ts",
+    "seed": "tsx --conditions=react-server scripts/seed.ts",
+    "generate:globe": "tsx scripts/generate-globe-dots.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.3",
+    "clsx": "^2.1.1",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^1.52.0",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-leaflet": "^5.0.0",
+    "server-only": "^0.0.1",
+    "sonner": "^2.0.8",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@tailwindcss/turbopack": "^4",
+    "@types/d3-geo": "^3.1.1",
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^24.19.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/topojson-client": "^3.1.5",
+    "@types/topojson-specification": "^1.0.5",
+    "d3-geo": "^3.1.1",
+    "dotenv": "^18.0.6",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.0",
+    "tailwindcss": "^4",
+    "topojson-client": "^3.1.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^5.0.3",
+    "world-atlas": "^2.0.2"
+  }
+}

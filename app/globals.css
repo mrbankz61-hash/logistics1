@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Change these to re-skin the whole app.
+ *   brand  – electric blue: primary actions, links, highlights
+ *   accent – signal orange: the accent word in headlines, progress, live markers
+ *   ink    – near-black navy for dark sections
+ */
+@theme {
+  --color-brand-50: #eef0ff;
+  --color-brand-100: #dfe2ff;
+  --color-brand-200: #c4c8ff;
+  --color-brand-300: #9da2ff;
+  --color-brand-400: #7b80ff;
+  --color-brand-500: #4d50ff;
+  --color-brand-600: #2f2dff;
+  --color-brand-700: #2420e0;
+  --color-brand-800: #1e1bb4;
+  --color-brand-900: #1c1c8d;
+  --color-brand-950: #10104f;
+
+  --color-accent-300: #ffa58f;
+  --color-accent-400: #ff7a5c;
+  --color-accent-500: #ff5a36;
+  --color-accent-600: #e8461f;
+
+  --color-ink-950: #04050c;
+  --color-ink-900: #070914;
+  --color-ink-800: #0d1020;
+  --color-ink-700: #161b33;
+  --color-ink-600: #252b47;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-exo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-slate-900);
+}
+
+/* Visible, consistent keyboard focus everywhere (form controls use a ring instead). */
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+/* On dark sections the focus ring switches to the accent so it stays visible. */
+.on-dark :where(a, button, summary, [tabindex]):focus-visible {
+  outline-color: var(--color-accent-400);
+}
+
+/* Faint dotted grid used behind dark sections. */
+.bg-dot-grid {
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Map markers (Leaflet divIcons) ---------- */
+.map-pin {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+}
+.map-pin--origin {
+  background: var(--color-slate-700);
+}
+.map-pin--destination {
+  background: var(--color-brand-700);
+}
+.map-pin--waypoint {
+  width: 18px;
+  height: 18px;
+  background: var(--color-slate-400);
+}
+.map-pin--pick {
+  background: var(--color-amber-500);
+}
+.map-vehicle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: var(--color-brand-600);
+  color: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.35);
+}
+.map-vehicle::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 9999px;
+  border: 2px solid var(--color-brand-500);
+  opacity: 0;
+  animation: vehicle-pulse 2.4s ease-out infinite;
+}
+.map-vehicle--still::after {
+  animation: none;
+}
+@keyframes vehicle-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+.leaflet-container {
+  font-family: var(--font-sans);
+}
+.leaflet-container.pick-mode {
+  cursor: crosshair;
+}
+
+/* Showcase copy swaps in when the active service changes. */
+.showcase-fade {
+  animation: showcase-fade 0.5s ease-out both;
+}
+@keyframes showcase-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
